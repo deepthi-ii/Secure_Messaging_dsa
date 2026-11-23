@@ -1,0 +1,158 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * SecureMessage Lab design tokens
+ * Deep navy base, electric blue for primary actions and integrity paths,
+ * teal for "verified / accepted", rose for "rejected / tampered", amber for rotation.
+ */
+:root {
+  --radius: 0.875rem;
+
+  --background: #0a1220;
+  --foreground: #e4ecf7;
+  --card: #0f1a2d;
+  --card-foreground: #e4ecf7;
+  --popover: #111d33;
+  --popover-foreground: #e4ecf7;
+  --primary: #4d8dff;
+  --primary-foreground: #050d1c;
+  --secondary: #17263f;
+  --secondary-foreground: #d6e2f5;
+  --muted: #142139;
+  --muted-foreground: #8b9cb9;
+  --accent: #1a2b47;
+  --accent-foreground: #e4ecf7;
+  --destructive: #f2557a;
+  --destructive-foreground: #1a0610;
+  --border: #1f3150;
+  --input: #253a5e;
+  --ring: #4d8dff;
+
+  --teal: #2ccdb8;
+  --teal-foreground: #03201c;
+  --amber: #f2b544;
+  --violet: #9c8cff;
+
+  --chart-1: #4d8dff;
+  --chart-2: #2ccdb8;
+  --chart-3: #f2557a;
+  --chart-4: #f2b544;
+  --chart-5: #9c8cff;
+
+  --sidebar: #0c1626;
+}
+
+@theme inline {
+  --font-sans: "IBM Plex Sans Variable", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-teal: var(--teal);
+  --color-teal-foreground: var(--teal-foreground);
+  --color-amber: var(--amber);
+  --color-violet: var(--violet);
+  --color-sidebar: var(--sidebar);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: calc(var(--radius) - 2px);
+  --radius-xl: var(--radius);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "ss02";
+    background-image:
+      radial-gradient(1100px 560px at 12% -12%, rgb(77 141 255 / 0.1), transparent 70%),
+      radial-gradient(800px 480px at 100% -5%, rgb(44 205 184 / 0.06), transparent 70%);
+    background-attachment: fixed;
+  }
+  ::selection {
+    background: rgb(77 141 255 / 0.35);
+  }
+}
+
+@layer utilities {
+  .font-hash {
+    font-family: var(--font-mono);
+    font-variant-ligatures: none;
+    letter-spacing: -0.01em;
+  }
+  .panel-glow {
+    background-image: linear-gradient(180deg, rgb(255 255 255 / 0.025), transparent 40%);
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #253a5e transparent;
+  }
+}
+
+/* One deliberate motion: new events slide in from the top of a log. */
+@keyframes event-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-event-in {
+  animation: event-in 220ms ease-out both;
+}
+
+@keyframes step-in {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-step-in {
+  animation: step-in 260ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-event-in,
+  .animate-step-in {
+    animation: none;
+  }
+  * {
+    transition-duration: 0ms !important;
+  }
+}
