@@ -1,8 +1,5 @@
-import type { Metadata } from "next";
-import { MerkleView } from "@/components/merkle/merkle-view";
+import { DashboardView } from "@/components/dashboard/dashboard-view";
 
-export const metadata: Metadata = { title: "Merkle verification" };
-
-export default function MerklePage() {
-  return <MerkleView />;
+export default function DashboardPage() {
+  return <DashboardView />;
 }
